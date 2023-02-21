@@ -15,7 +15,7 @@ app.use(cors());
 const routesDir = path.join(__dirname, 'routes');
 
 // load the routes from the specified directory
-const loadRoutes = require('./routeLoader');
+const loadRoutes = require('./utils/routeLoader');
 loadRoutes(app, routesDir);
 
 // error handler middleware

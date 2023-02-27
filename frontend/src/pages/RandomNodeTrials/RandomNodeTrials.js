@@ -1,4 +1,7 @@
 import React, { useState } from 'react';
+import { Button, Input } from 'semantic-ui-react';
+import 'semantic-ui-css/semantic.min.css';
+import './RandomNodeTrials.css';
 
 function RandomNodeTrials() {
 
@@ -29,25 +32,26 @@ function RandomNodeTrials() {
     };
 
     return (
-        <>
-            <div>
-                <div>
-                    <label htmlFor="apiRouteInput">API Route:</label>
-                    <input
-                        id="apiRouteInput"
-                        type="text"
-                        value={apiRoute}
-                        onChange={(e) => setApiRoute(e.target.value)}
-                    />
-                    <button onClick={handleSubmit}>Submit</button>
-                </div>
-                <div>
-                    <p>Response:</p>
-                    <pre>{response}</pre>
-                </div>
+        <div className="custom-container">
+
+            <h3>Enter API Route:</h3>
+
+            <div className="input-field">
+
+                <Input className="custom-input" id="apiRouteInput" type="text" value={apiRoute} onChange={(e) => setApiRoute(e.target.value)} />
+
             </div>
-        </>
+
+            <Button className="custom-button" onClick={handleSubmit}>Submit</Button>
+
+            <div className="custom-response">
+                <p >Response:</p>
+                <pre>{response}</pre>
+            </div>
+
+        </div>
     );
+
 }
 
 export default RandomNodeTrials;

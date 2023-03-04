@@ -33,22 +33,22 @@ function RandomNodeTrials() {
 
     return (
         <div className="custom-container">
-
             <h3>Enter API Route:</h3>
-
             <div className="input-field">
-
-                <Input className="custom-input" id="apiRouteInput" type="text" value={apiRoute} onChange={(e) => setApiRoute(e.target.value)} />
-
+                <Input
+                    className="custom-input"
+                    id="apiRouteInput"
+                    type="text" v
+                    alue={apiRoute}
+                    onChange={(e) => setApiRoute(e.target.value)}
+                    placeholder="API route to test"
+                />
             </div>
-
             <Button className="custom-button" onClick={handleSubmit}>Submit</Button>
-
             <div className="custom-response">
                 <p >Response:</p>
                 <pre>{response}</pre>
             </div>
-
         </div>
     );
 

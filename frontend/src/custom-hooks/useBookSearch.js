@@ -8,7 +8,6 @@ function useBookSearch(query, pageNumber) {
     const [books, setBooks] = useState([]);
     const [hasMore, setHasMore] = useState(false);
 
-
     useEffect(() => {
         setBooks([])
     }, [query])
@@ -20,35 +19,28 @@ function useBookSearch(query, pageNumber) {
         axios({
             method: "GET",
             url: "https://openlibrary.org/search.json",
-            params: { q: query, page: pageNumber },
+            params: { q: query || '', page: pageNumber || 1 },
             cancelToken: new axios.CancelToken(c => cancel = c)
         }).then(res => {
-
             let { docs } = res.data
             let { length } = docs
-
             setBooks(prevBooks => {
-                return [...new Set([...prevBooks, ...docs.map(book => ({
+                return [...new Set([...prevBooks, ...docs.map((book) => ({
                     title: book.title,
                     author: book.author_name ? book.author_name[0] : "Unknown",
+                    firstPublishYear: book.first_publish_year ?? "Unknown",
                 })
                 )])]
             });
-
             setHasMore(length > 0);
             setLoading(false);
             console.log(docs);
             console.log(docs.map(book => book.title));
-
         }).catch(e => {
             if (axios.isCancel(e)) return
         })
-
         return () => cancel()
-
     }, [query, pageNumber])
-
-
     return { loading, error, books, hasMore }
 }
 

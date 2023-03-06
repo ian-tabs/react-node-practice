@@ -9,7 +9,6 @@ function InfiniteTable() {
 
   const [query, setQuery] = useState('');
   const [pageNumber, setPageNumber] = useState(1);
-
   const observer = useRef();
 
   const { books, hasMore, loading, error } = useBookSearch(query, pageNumber);
@@ -58,16 +57,21 @@ function InfiniteTable() {
           {books.map((book, index) => {
             const { title, author, firstPublishYear } = book;
             const refVariable = (books.length === index + 1) ? lastBookElementRef : null;
-            return (<DynamicTableRowCells key={index + 1} refVariable={refVariable} rows={{ rowNumber: index + 1, title: title, author: author, firstPublishYear: firstPublishYear }} />)
-
+            return (<DynamicTableRowCells
+              key={index + 1}
+              refVariable={refVariable}
+              rows={{
+                rowNumber: index + 1,
+                title: title,
+                author: author,
+                firstPublishYear: firstPublishYear
+              }} />)
           })}
-
           {!loading && !error && books.length === 0 && (
             <Table.Row>
               <Table.Cell>No results found</Table.Cell>
             </Table.Row>
           )}
-
         </Table.Body>
       </Table>
       {loading && <Loader active inline='centered' />}
@@ -75,7 +79,6 @@ function InfiniteTable() {
       {error && <div>Error</div>}
     </>
   );
-
 }
 
 export default InfiniteTable;

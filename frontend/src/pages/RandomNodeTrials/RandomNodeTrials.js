@@ -10,7 +10,6 @@ function RandomNodeTrials() {
 
     const handleSubmit = () => {
         fetch(`http://localhost:3001/api/${apiRoute}`)
-
             .then((res) => {
                 if (!res.ok) {
                     throw new Error(`HTTP error! status: ${res.status}`);
@@ -51,7 +50,6 @@ function RandomNodeTrials() {
             </div>
         </div>
     );
-
 }
 
 export default RandomNodeTrials;

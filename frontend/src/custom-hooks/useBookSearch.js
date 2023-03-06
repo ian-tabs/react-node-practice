@@ -34,8 +34,6 @@ function useBookSearch(query, pageNumber) {
             });
             setHasMore(length > 0);
             setLoading(false);
-            console.log(docs);
-            console.log(docs.map(book => book.title));
         }).catch(e => {
             if (axios.isCancel(e)) return
         })

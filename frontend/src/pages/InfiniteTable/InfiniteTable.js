@@ -1,6 +1,7 @@
 import React, { useState, useRef, useCallback } from "react";
 import useBookSearch from "../../custom-hooks/useBookSearch";
-import { Input, Table, Ref, Loader } from "semantic-ui-react";
+import { Input, Table, Loader } from "semantic-ui-react";
+import DynamicTableRowCells from "../../components/DynamicTableRowCells";
 import { debounce } from "lodash";
 import './InfiniteTable.css';
 
@@ -36,17 +37,6 @@ function InfiniteTable() {
     debouncedSearch(e.target.value, 1);
   }
 
-  const MemoizedTableRow = React.memo(({ index, title, author, firstPublishYear, refVariable }) => (
-    <Ref innerRef={refVariable} key={index + 1}>
-      <Table.Row>
-        <Table.Cell>{index + 1}</Table.Cell>
-        <Table.Cell>{title}</Table.Cell>
-        <Table.Cell>{author}</Table.Cell>
-        <Table.Cell>{firstPublishYear}</Table.Cell>
-      </Table.Row>
-    </Ref>
-  ));
-
   return (
     <>
       <Input
@@ -68,7 +58,8 @@ function InfiniteTable() {
           {books.map((book, index) => {
             const { title, author, firstPublishYear } = book;
             const refVariable = (books.length === index + 1) ? lastBookElementRef : null;
-            return <MemoizedTableRow index={index} title={title} author={author} firstPublishYear={firstPublishYear} refVariable={refVariable} />;
+            return (<DynamicTableRowCells key={index + 1} refVariable={refVariable} rows={{ rowNumber: index + 1, title: title, author: author, firstPublishYear: firstPublishYear }} />)
+
           })}
 
           {!loading && !error && books.length === 0 && (

@@ -35,6 +35,8 @@ function useBookSearch(query, pageNumber) {
             setHasMore(length > 0);
             setLoading(false);
         }).catch(e => {
+            setError(true);
+            setLoading(false);
             if (axios.isCancel(e)) return
         })
         return () => cancel()

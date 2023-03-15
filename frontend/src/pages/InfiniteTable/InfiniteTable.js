@@ -28,8 +28,7 @@ function InfiniteTable() {
     debounce((query, pageNumber) => {
       setQuery(query);
       setPageNumber(pageNumber);
-    }, 500),
-    []
+    }, 500), []
   ).current;
 
   function handleInputChange(e) {
